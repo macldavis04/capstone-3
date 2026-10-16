@@ -80,11 +80,12 @@ def synthesise(state: OrchestratorState) -> OrchestratorState:
 
     prompt = (
         f"Using the information below, answer the following question clearly.\n"
-        f"Cite which agent(s) and source(s) the information came from.\n\n"
+        f"Cite which agent(s) and source(s) the information came from.\n"
+        f"Label each fact as coming from the SQL Agent or the Retrieval Agent.\n\n"
         f"Question: {state['question']}\n\n"
         f"Information:\n{context}"
     )
-    result = invoke_claude(prompt, max_tokens=800)
+    result = invoke_claude(prompt, max_tokens=800, component="synthesis")
 
     return {
         **state,
@@ -96,6 +97,18 @@ def synthesise(state: OrchestratorState) -> OrchestratorState:
     }
 
 
+def pick_first_agent(state: OrchestratorState) -> str:
+    if state["route"] == "retrieval":
+        return "retrieval_agent"
+    return "sql_agent"
+
+
+def after_sql_agent(state: OrchestratorState) -> str:
+    if state["route"] == "both":
+        return "retrieval_agent"
+    return "synthesiser"
+
+
 def build_orchestrator():
     graph = StateGraph(OrchestratorState)
     graph.add_node("router", route_question)
@@ -104,8 +117,8 @@ def build_orchestrator():
     graph.add_node("synthesiser", synthesise)
 
     graph.set_entry_point("router")
-    graph.add_edge("router", "sql_agent")
-    graph.add_edge("sql_agent", "retrieval_agent")
+    graph.add_conditional_edges("router", pick_first_agent)
+    graph.add_conditional_edges("sql_agent", after_sql_agent)
     graph.add_edge("retrieval_agent", "synthesiser")
     graph.add_edge("synthesiser", END)
 

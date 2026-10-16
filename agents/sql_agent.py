@@ -63,7 +63,7 @@ def generate_sql(question: str) -> str:
         f"Generate a SQL query to answer: {question}\n\n"
         "Return ONLY the SQL query. No explanation, no markdown, no backticks."
     )
-    result = invoke_claude(prompt, max_tokens=512)
+    result = invoke_claude(prompt, max_tokens=512, component="sql_generation")
     sql = result["text"].strip()
     return sql.removeprefix("```sql").removeprefix("```").removesuffix("```").strip()
 
@@ -105,8 +105,8 @@ def validated_sql_agent(question: str) -> dict:
         f"Question: {question}\nColumns: {result['columns']}\n"
         f"Data: {result['rows'][:20]}\n\nAnswer concisely."
     )
-    interpretation = invoke_claude(prompt, max_tokens=500)
-
+    interpretation = invoke_claude(prompt, max_tokens=500, component="sql_interpretation")
+    
     return {
         "answer": interpretation["text"],
         "sql": sql,

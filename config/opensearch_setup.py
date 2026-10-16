@@ -40,7 +40,7 @@ def create_index(client):
                 "embedding": {
                     "type": "knn_vector",
                     "dimension": 384,
-                    "method": {"name": "hnsw", "space_type": "cosinesimil", "engine": "faiss"}
+                    "method": {"name": "hnsw", "space_type": "innerproduct", "engine": "faiss"}
                 }
             }
         }
@@ -107,11 +107,7 @@ def extract_text_from_s3_pdf(bucket: str, document_key: str) -> str:
     return "\n".join(lines)
 
 
-# Chosen chunk_size=500, overlap=50 words: large enough to preserve context
-# for a policy/procedure paragraph, small enough that each chunk stays
-# topically focused for accurate embedding.
-
-def chunk_text(text: str, chunk_size: int = 500, overlap: int = 50) -> list[str]:
+def chunk_text(text: str, chunk_size: int = 200, overlap: int = 50) -> list[str]:
     words = text.split()
     chunks = []
     for i in range(0, len(words), chunk_size - overlap):
@@ -143,7 +139,7 @@ def index_chunks(embedded_chunks: list[dict], source_document: str, client):
 
 def process_document(bucket: str, document_key: str, os_client):
     raw_text = extract_text_from_s3_pdf(bucket, document_key)
-    chunks = chunk_text(raw_text, chunk_size=500, overlap=50)
+    chunks = chunk_text(raw_text, chunk_size=200, overlap=50)
     embedded_chunks = embed_chunks(chunks)
     index_chunks(embedded_chunks, document_key, os_client)
     print(f"Processed {len(chunks)} chunks from {document_key}")

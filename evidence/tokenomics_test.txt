@@ -1,0 +1,17 @@
+Per-call log for multi-tool query (route=both):
+Q: What is the total budget across projects, and what is the approval process for budget changes?
+[TOKENS] sql_generation: in=188 out=15 cost=$0.000789
+[TOKENS] sql_interpretation: in=53 out=133 cost=$0.002154
+[TOKENS] retrieval_answer: in=1366 out=105 cost=$0.005673
+[TOKENS] synthesis: in=414 out=383 cost=$0.006987
+
+10-query cost summary:
+Component             Calls     Input    Output    Cost (USD)
+-------------------------------------------------------------
+sql_generation            7      1269      1016      0.019047
+sql_interpretation        6       805       761      0.013830
+synthesis                10      3286      3486      0.062148
+retrieval_answer          6      7734       827      0.035607
+-------------------------------------------------------------
+Total cost for 10 queries: $0.130632
+Most tokens used by: retrieval_answer (8561 tokens)

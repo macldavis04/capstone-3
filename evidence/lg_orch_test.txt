@@ -1,0 +1,153 @@
+======================================================================
+Question: How many projects does each client have?
+route: sql
+sql_result is None: False
+retrieval_result is None: True
+token_usage: {'input': 263, 'output': 243}
+final_answer:
+## Projects per Client
+
+Here is a breakdown of how many projects each client has:
+
+| Client | Project Count |
+|--------|--------------|
+| Acme Corp | **2** |
+| Delta Manufacturing | **1** |
+| Beta Financial | **1** |
+| Gamma Health | **1** |
+| Epsilon Retail | **1** |
+
+### Key Insight:
+- **Acme Corp** leads with **2 projects**
+- All other clients — **Delta Manufacturing, Beta Financial, Gamma Health, and Epsilon Retail** — each have **1 project**
+
+---
+
+### Source Attribution:
+🗄️ **SQL Agent** — All data above was retrieved via a direct database query:
+```sql
+SELECT c.id, c.name, COUNT(p.id) AS project_count
+FROM clients c
+LEFT JOIN projects p ON c.id = p.client_id
+GROUP BY c.id, c.name
+ORDER BY project_count DESC
+```
+> No information was provided by the **Retrieval Agent** for this question.
+
+======================================================================
+Question: Describe the remote work policy.
+route: retrieval
+sql_result is None: True
+retrieval_result is None: False
+token_usage: {'input': 564, 'output': 724}
+final_answer:
+# Acme Consulting Remote Work Policy
+
+All of the following information comes from the **Retrieval Agent**, sourced from **`remote-work-policy.pdf`**.
+
+---
+
+## 👤 Eligibility
+- Employees must complete a **90-day probationary period** before applying for a remote arrangement, unless hired as fully remote (documented in their offer letter).
+- **Independent contractors are not covered** by this policy.
+- Client-facing consultants on on-site engagements follow a **hybrid schedule** determined by their engagement lead.
+
+> 📌 *Source: Retrieval Agent — remote-work-policy.pdf [Source 1]*
+
+---
+
+## 🕐 Core Hours & Availability
+- All remote employees must be available **10:00 AM – 3:00 PM in their local time zone**.
+- Outside these hours, schedules are flexible as long as weekly hour expectations and client meetings are met.
+- Employees traveling across time zones for **more than three consecutive business days** must notify their manager in advance.
+
+> 📌 *Source: Retrieval Agent — remote-work-policy.pdf [Source 4]*
+
+---
+
+## 💻 Equipment & Security
+- The company provides a **laptop, external monitor, and VPN access**.
+- Company data must remain on **company-issued devices** — never stored on personal cloud storage, email, or removable media.
+- Public Wi-Fi use **requires VPN**.
+- Lost or stolen equipment must be reported to IT Security **within four hours**.
+
+> 📌 *Source: Retrieval Agent — remote-work-policy.pdf [Source 4]*
+
+---
+
+## 🏠 Home Office Stipend
+- Employees may claim up to **$500 per year** for home office equipment (desks, chairs, monitors, lighting).
+- Receipts must be itemized and submitted by **December 15**.
+- **Internet and utilities are not covered**, and unused amounts **do not roll over**.
+
+> 📌 *Source: Retrieval Agent — remote-work-policy.pdf [Sources 2 & 3]*
+
+---
+
+## 📊 Performance & Review
+- Remote arrangements are reviewed **annually**.
+- Arrangements can be modified or revoked if expectations aren't met.
+- Managers must provide a **30-day improvement window** before revoking an arrangement.
+- **Exception:** No improvement window is required for **security policy violations**.
+
+> 📌 *Source: Retrieval Agent — remote-work-policy.pdf [Source 2]*
+
+---
+
+## ✈️ Working Abroad
+- Employees may work from another country for up to **20 business days per year**, subject to **manager approval** and an **IT Security review**.
+
+> 📌 *Source: Retrieval Agent — remote-work-policy.pdf [Source 3]*
+
+---
+
+> ⚠️ **Note:** The **SQL Agent** was **not used** in answering this question, as remote work policy details are document-based and not stored in a structured database. All information was retrieved exclusively by the **Retrieval Agent** from `remote-work-policy.pdf`.
+
+======================================================================
+Question: What is the total project budget for clients in the Retail industry, and what approach does the retail supply chain case study describe?
+route: both
+sql_result is None: False
+retrieval_result is None: False
+token_usage: {'input': 597, 'output': 549}
+final_answer:
+## Answer
+
+### 1. Total Project Budget for Retail Industry Clients: **$400,000**
+
+- **Source:** SQL Agent
+- **Label:** 📊 SQL Agent
+- **Query Used:** `SELECT SUM(p.budget) AS total_project_budget FROM clients c JOIN projects p ON c.id = p.client_id WHERE c.industry = 'Retail'`
+
+> Note: The Retrieval Agent could not find budget figures in its documents, confirming that this data point is strictly database-derived.
+
+---
+
+### 2. Approach Described in the Retail Supply Chain Case Study
+
+- **Source:** Retrieval Agent — `retail-supply-chain-case-study.pdf` (Sources 2 & 4)
+- **Label:** 📄 Retrieval Agent
+
+The case study describes the following approach:
+
+1. **Centralized Demand Forecasting System** — Ingests point-of-sale data nightly and generates automated purchase order recommendations, factoring in day-of-week seasonality, local weather forecasts, and historical promotional lift.
+
+2. **Weekly Variance Review Process** — Allows store managers to flag local anomalies to ensure accuracy and responsiveness.
+
+3. **Phased Rollout** — Deployed across three regions over four months, beginning with the five highest-volume stores to validate the model before company-wide expansion.
+
+4. **Training & Support** — Included two half-day training sessions for store managers and a dedicated support channel for the first six weeks post-launch in each region.
+
+5. **Manager Override Authority** — Purchase orders were *not* fully automated; managers retained override ability, which significantly improved adoption over a previously attempted fully automated pilot.
+
+---
+
+### Summary Table
+
+| Facts | Agent | Source |
+|---|---|---|
+| Total retail project budget = $400,000 | SQL Agent | Database query |
+| Demand forecasting system details | Retrieval Agent | retail-supply-chain-case-study.pdf |
+| Weekly variance review process | Retrieval Agent | retail-supply-chain-case-study.pdf |
+| Phased rollout strategy | Retrieval Agent | retail-supply-chain-case-study.pdf |
+| Training & support plan | Retrieval Agent | retail-supply-chain-case-study.pdf |
+| Manager override authority | Retrieval Agent | retail-supply-chain-case-study.pdf |

@@ -1,0 +1,268 @@
+======================================================================
+Q1 [RDS only]
+Question:   How many consultants are assigned to each project?
+Route:      sql
+Validation: PASSED
+SQL:        SQL: SELECT p.id AS project_id, p.name AS project_name, COUNT(c.id) AS consultant_count
+FROM projects p
+LEFT JOIN consultants c ON p.id = c.project_id
+GROUP BY p.id, p.name
+ORDER BY consultant_count DESC
+Answer:
+## Consultants Assigned to Each Project
+
+Based on the available data, **every project has exactly 1 consultant assigned** to it. Here is the full breakdown:
+
+| Project | Consultant Count |
+|---------|-----------------|
+| Patient Records Modernization | 1 |
+| Inventory Management Overhaul | 1 |
+| Data Migration | 1 |
+| Fraud Detection System | 1 |
+| Supply Chain Analytics | 1 |
+| Client Portal Redesign | 1 |
+
+Across all **6 projects**, there is a total of **6 consultants** assigned, with each project having exactly **1 consultant**.
+
+---
+
+### Source Attribution
+
+- 📊 **SQL Agent** — All data above was retrieved via a direct database query joining the `projects` and `consultants` tables, grouping by project and counting consultant assignments.
+  - *Query used:* `SELECT p.id, p.name, COUNT(c.id) AS consultant_count FROM projects p LEFT JOIN consultants c ON p.id = c.project_id GROUP BY p.id, p.name ORDER BY consultant_count DESC`
+
+> ℹ️ **Note:** The **Retrieval Agent** did not contribute any information to this answer. All facts are sourced exclusively from the **SQL Agent**.
+
+======================================================================
+Q2 [RDS only]
+Question:   Which clients have a contract value over 300000?
+Route:      sql
+Validation: PASSED
+SQL:        SQL: SELECT id, name, industry, region, contract_value
+FROM clients
+WHERE contract_value > 300000
+ORDER BY contract_value DESC;
+Answer:
+## Clients with Contract Value Over $300,000
+
+Based on the available data, **2 clients** have a contract value exceeding $300,000:
+
+| ID | Name | Industry | Region | Contract Value |
+|----|------|----------|--------|----------------|
+| 2 | **Beta Financial** | Finance | East | $480,000 |
+| 3 | **Gamma Health** | Healthcare | South | $320,000 |
+
+---
+
+### 📌 Source Attribution
+
+Both facts are sourced from the **SQL Agent**:
+
+- **Beta Financial** (Finance, East) — Contract Value: **$480,000**
+  *[SQL Agent — Query: `SELECT id, name, industry, region, contract_value FROM clients WHERE contract_value > 300000 ORDER BY contract_value DESC;`]*
+
+- **Gamma Health** (Healthcare, South) — Contract Value: **$320,000**
+  *[SQL Agent — Query: `SELECT id, name, industry, region, contract_value FROM clients WHERE contract_value > 300000 ORDER BY contract_value DESC;`]*
+
+> ⚠️ **Note:** No information was provided by the **Retrieval Agent** for this query.
+
+======================================================================
+Q3 [Documents only]
+Question:   Describe the home office equipment allowance in the remote work policy.
+Route:      retrieval
+Validation: N/A
+SQL:        N/A
+Answer:
+## Home Office Equipment Allowance – Remote Work Policy
+
+The following information comes entirely from the **Retrieval Agent**, sourced from **`remote-work-policy.pdf`**:
+
+---
+
+### 💰 Allowance Amount
+- **[Retrieval Agent – remote-work-policy.pdf]** Eligible employees may claim **up to $500 per year** toward home office equipment.
+
+### 🪑 Covered Items
+- **[Retrieval Agent – remote-work-policy.pdf]** Covered items include **desks, chairs, monitor arms, and lighting**.
+
+### 📋 How to Claim
+- **[Retrieval Agent – remote-work-policy.pdf]** Employees must submit claims through the **standard expense reimbursement process with itemized receipts**.
+
+### ⚠️ Key Limitations
+- **[Retrieval Agent – remote-work-policy.pdf]** Claims for the current calendar year must be submitted **no later than December 15**.
+- **[Retrieval Agent – remote-work-policy.pdf]** **Unused stipend amounts do not roll over** to the following year.
+- **[Retrieval Agent – remote-work-policy.pdf]** The stipend does **not** cover ongoing utilities such as **internet or electricity bills** — it is for equipment only.
+
+---
+
+> **Note:** All information was provided solely by the **Retrieval Agent** from `remote-work-policy.pdf` (Sources 1 & 4). The **SQL Agent** was not involved in answering this question.
+
+======================================================================
+Q4 [Documents only]
+Question:   What are the common pitfalls in a cloud data migration?
+Route:      retrieval
+Validation: N/A
+SQL:        N/A
+Answer:
+## Common Pitfalls in a Cloud Data Migration
+
+The following information was provided by the **Retrieval Agent**, sourced from `cloud-migration-playbook.pdf` and `q2-2026-client-report.pdf`:
+
+---
+
+### ⚠️ Common Pitfalls:
+
+1. **Underestimating integration complexity** — Scoping efforts often focus too heavily on data volume while underestimating how complex integrations can be.
+*(Retrieval Agent – cloud-migration-playbook.pdf)*
+
+2. **Treating discovery as optional** — Compressing or skipping the discovery phase to save time significantly increases downstream risk.
+*(Retrieval Agent – cloud-migration-playbook.pdf)*
+
+3. **Migrating known-bad data as-is** — Failing to schedule a data cleansing sprint before cutover means poor-quality data is carried into the new environment.
+*(Retrieval Agent – cloud-migration-playbook.pdf)*
+
+4. **Insufficient client communication** — Lack of regular updates during execution leads to avoidable stakeholder anxiety and loss of trust.
+*(Retrieval Agent – cloud-migration-playbook.pdf)*
+
+5. **Skipping a rollback plan for intermediate batches** — Rollback planning should not be limited to the final cutover; each intermediate batch also needs a contingency plan.
+*(Retrieval Agent – q2-2026-client-report.pdf)*
+
+---
+
+> **Note:** The **SQL Agent** did not contribute any information relevant to this question. All findings above come exclusively from the **Retrieval Agent**.
+
+======================================================================
+Q5 [Both sources]
+Question:   Which clients are in the Retail industry, and what does the retail supply chain case study describe about reducing food waste?
+Route:      both
+Validation: PASSED
+SQL:        SQL: SELECT id, name, industry, region, contract_value, created_date FROM clients WHERE industry = 'Retail'
+Answer:
+# Answer: Retail Industry Clients & Food Waste Reduction
+
+---
+
+## 🏢 Retail Industry Clients
+
+Two clients were identified in the Retail industry from the structured client database:
+
+| ID | Name | Region | Contract Value |
+|----|------|--------|----------------|
+| 1 | Acme Corp | North | $250,000 |
+| 5 | Epsilon Retail | North | $275,000 |
+
+> 📌 **Source: SQL Agent** — queried directly from the `clients` table using `WHERE industry = 'Retail'`
+
+---
+
+## 🛒 Retail Supply Chain Case Study: Reducing Food Waste
+
+The case study focuses on a **mid-sized regional grocery retailer** operating 45 stores across three states with ~$310 million in annual revenue.
+
+### 🔴 The Problem
+The client was experiencing an estimated **$2.3 million in annual waste**, primarily in produce and dairy, caused by overstock of perishable goods early in the week.
+
+> 📌 **Source: Retrieval Agent** — `retail-supply-chain-case-study.pdf` (Source 3)
+
+---
+
+### 🔧 The Approach
+A **centralized demand forecasting system** was implemented that:
+- Generated automated purchase order recommendations
+- Factored in day-of-week seasonality, local weather forecasts, and historical promotional lift
+- Maintained store manager override authority
+
+> 📌 **Source: Retrieval Agent** — `retail-supply-chain-case-study.pdf` (Source 4)
+
+---
+
+### ✅ The Results
+- **34% reduction in perishable waste** within six months of full deployment
+- The engagement **paid for itself within eight months** through waste reduction alone, before accounting for labor savings or reduced stockout-driven lost sales
+
+> 📌 **Source: Retrieval Agent** — `retail-supply-chain-case-study.pdf` (Source 1)
+
+---
+
+### 🔮 Future Considerations
+The client is evaluating applying a similar forecasting model to **non-perishable categories**, where carrying costs on overstocked slow-moving items remain a concern.
+
+> 📌 **Source: Retrieval Agent** — `retail-supply-chain-case-study.pdf` (Sources 1 & 2)
+
+---
+
+## ⚠️ Important Note on Source Gaps
+The **SQL Agent** was able to identify Retail clients from the database but had **no access to case study content** — it explicitly flagged that no case study table or document was available in its query scope. All food waste details came exclusively from the **Retrieval Agent** via `retail-supply-chain-case-study.pdf`. The two sources complement each other but cover different types of information.
+
+======================================================================
+Q6 [Both sources]
+Question:   How many projects are on-hold, and explain what data quality risk the Q2 2026 client report says is affecting the migration timeline?
+Route:      both
+Validation: PASSED
+SQL:        SQL: SELECT COUNT(*) AS on_hold_project_count
+FROM projects
+WHERE status = 'on-hold'
+Answer:
+## Answer
+
+### 1. How many projects are on-hold?
+
+**There is currently 1 project on-hold.**
+
+- 📊 **Source: SQL Agent** — Retrieved via a direct database query:
+  `SELECT COUNT(*) AS on_hold_project_count FROM projects WHERE status = 'on-hold'`
+- *(The Retrieval Agent was unable to find this information in its documents.)*
+
+---
+
+### 2. What data quality risk does the Q2 2026 client report say is affecting the migration timeline?
+
+According to the Q2 2026 client report, **8% of historical records contain data quality issues** inherited from a **prior system migration in 2019**. The specific issues are:
+
+- **Duplicate customer records**
+- **Inconsistent date formatting** in the transaction history tables
+
+Migrating these records without remediation would **propagate known errors** into the new platform's reporting layer. To address this, the engagement team recommends a **two-week data cleansing sprint before final cutover**, which would delay the final cutover by approximately **ten business days**. This is considered preferable to a more costly post-go-live fix, when the affected records would already be active across multiple downstream reports.
+
+- 📄 **Source: Retrieval Agent** — Retrieved from **q2-2026-client-report.pdf** (Sources 1 & 5) and corroborated by **cloud-migration-playbook.pdf**
+- *(The SQL Agent had no structured data available to answer this question.)*
+
+---
+
+### Summary of Sources
+
+| Fact | Agent | Source |
+|---|---|---|
+| 1 project is on-hold | **SQL Agent** | `projects` database table |
+| Data quality risk details (8% of records, duplicate/date issues, 10-day delay) | **Retrieval Agent** | `q2-2026-client-report.pdf`, `cloud-migration-playbook.pdf` |
+
+======================================================================
+Q7 [Unsafe SQL]
+Question:   Delete all invoices with status overdue
+Route:      sql
+Validation: BLOCKED
+SQL:        SQL: DELETE FROM invoices WHERE status = 'overdue'
+Answer:
+I was unable to find relevant information to answer this question.
+
+======================================================================
+Q8 [Unanswerable]
+Question:   What is the current stock price of Beta Financial?
+Route:      retrieval
+Validation: N/A
+SQL:        N/A
+Answer:
+## Answer
+
+**The current stock price of Beta Financial could not be determined.**
+
+Neither of the available agents was able to provide this information:
+
+- **Retrieval Agent** *(Sources: `q2-2026-client-report.pdf`, `retail-supply-chain-case-study.pdf`)*: Explicitly confirmed that **no information about Beta Financial or any stock prices** exists within the available documents. The documents only contain information related to a Q2 2026 data migration engagement report and a retail supply chain optimization case study.
+
+- **SQL Agent**: No result was returned from the SQL Agent regarding Beta Financial's stock price.
+
+### Conclusion
+The current stock price of Beta Financial is **not available** in any of the provided data sources. To obtain this information, you may want to:
+1. Check a **financial data provider** (e.g., Bloomberg, Yahoo Finance, Google Finance).
+2. Query a **dedicated financial database** that includes real-time or historical stock pricing data.

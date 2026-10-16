@@ -12,16 +12,22 @@ import json
 
 bedrock = boto3.client("bedrock-runtime", region_name="us-east-1")
 
+INPUT_PRICE_PER_M = 3.00
+OUTPUT_PRICE_PER_M = 15.00
+
+CALL_LOG = []
+
 
 def get_model_id() -> str:
     account_id = boto3.client("sts").get_caller_identity()["Account"]
     return f"arn:aws:bedrock:us-east-1:{account_id}:inference-profile/us.anthropic.claude-sonnet-4-6"
 
 
-def invoke_claude(prompt: str, max_tokens: int = 500) -> dict:
+def invoke_claude(prompt: str, max_tokens: int = 500, component: str = "unlabeled") -> dict:
     """
     Sends a single-turn prompt to Claude via Bedrock and returns the response
     text alongside token usage. Use this for simple prompt-in, text-out calls.
+    Each call is logged with its token counts and cost.
     """
     body = {
         "anthropic_version": "bedrock-2023-05-31",
@@ -30,12 +36,19 @@ def invoke_claude(prompt: str, max_tokens: int = 500) -> dict:
     }
     response = bedrock.invoke_model(modelId=get_model_id(), body=json.dumps(body))
     result = json.loads(response["body"].read())
+
+    input_tokens = result["usage"]["input_tokens"]
+    output_tokens = result["usage"]["output_tokens"]
+    cost = input_tokens * INPUT_PRICE_PER_M / 1000000 + output_tokens * OUTPUT_PRICE_PER_M / 1000000
+    print(f"[TOKENS] {component}: in={input_tokens} out={output_tokens} cost=${cost:.6f}")
+    CALL_LOG.append({"component": component, "input_tokens": input_tokens,
+                     "output_tokens": output_tokens, "cost": cost})
+
     return {
         "text": result["content"][0]["text"],
-        "input_tokens": result["usage"]["input_tokens"],
-        "output_tokens": result["usage"]["output_tokens"]
+        "input_tokens": input_tokens,
+        "output_tokens": output_tokens
     }
-
 
 def invoke_claude_raw(body: dict) -> dict:
     """

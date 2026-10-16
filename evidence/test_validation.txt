@@ -1,0 +1,31 @@
+Case 1: SELECT name, industry FROM clients
+  Expected: ALLOWED
+  Actual:   ALLOWED
+  Reason:   OK
+  Result:   PASS
+
+Case 2: DROP TABLE clients
+  Expected: BLOCKED
+  Actual:   BLOCKED
+  Reason:   Blocked: 'DROP' is not permitted.
+  Result:   PASS
+
+Case 3: SELECT deleted_at FROM projects
+  Expected: ALLOWED
+  Actual:   ALLOWED
+  Reason:   OK
+  Result:   PASS
+
+Case 4: SELECT * FROM clients; DROP TABLE clients
+  Expected: BLOCKED
+  Actual:   BLOCKED
+  Reason:   Blocked: 'DROP' is not permitted.
+  Result:   PASS
+
+Case 5: SELECT * FROM clients; SELECT * FROM invoices
+  Expected: BLOCKED
+  Actual:   BLOCKED
+  Reason:   Blocked: multiple statements detected.
+  Result:   PASS
+
+5/5 passed

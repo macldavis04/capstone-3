@@ -1,0 +1,14 @@
+=== RDS ===
+[PASS] SELECT COUNT(*) FROM clients;  -> 5
+[PASS] SELECT COUNT(*) FROM projects;  -> 6
+[PASS] SELECT COUNT(*) FROM consultants;  -> 6
+[PASS] SELECT COUNT(*) FROM invoices;  -> 7
+
+=== OpenSearch ===
+[PASS] documents index count -> 16
+
+Foundation: READY
+
+=== Tool interfaces ===
+run_sql_agent keys:       ['answer', 'metadata', 'sources', 'success']
+run_retrieval_agent keys: ['answer', 'metadata', 'sources', 'success']
