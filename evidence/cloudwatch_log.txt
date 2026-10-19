@@ -33,3 +33,30 @@ Traceback (most recent call last):
 2026-10-16T18:20:21 [LOG] query_complete: {"trace_id": "5733230e", "route": "both", "sql_validation": "PASSED", "retrieval_chunk_count": 5, "token_usage": {"input": 593, "output": 402}}
 2026-10-16T18:20:21 END RequestId: 0be0c408-695d-47a0-aaab-4a0287064168
 2026-10-16T18:20:21 REPORT RequestId: 0be0c408-695d-47a0-aaab-4a0287064168	Duration: 21119.30 ms	Billed Duration: 24832 ms	Memory Size: 512 MB	Max Memory Used: 450 MB	Init Duration: 3712.39 ms
+2026-10-19T03:36:22 INIT_START Runtime Version: python:3.12.mainlinev2.v43	Runtime Version ARN: arn:aws:lambda:us-east-1::runtime:36aeb19f3326e129d9f096dea0a3c6a9ca8dce2610e62d2b2060747602d863ae
+2026-10-19T03:36:26 [0;93m2026-10-19 03:36:26.597257628 [W:onnxruntime:Default, telemetry_1ds.cc:600 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+2026-10-19T03:36:26 START RequestId: 987bf326-fb62-4322-a419-3b5e7b2cee78 Version: $LATEST
+2026-10-19T03:36:26 [LOG] query_start: {"trace_id": "dbf6d5f1"}
+2026-10-19T03:36:27 [TOKENS] sql_generation: in=196 out=46 cost=$0.001278
+2026-10-19T03:36:29 [TOKENS] sql_interpretation: in=63 out=128 cost=$0.002109
+2026-10-19T03:36:37 [TOKENS] retrieval_answer: in=1277 out=267 cost=$0.007836
+2026-10-19T03:36:42 [TOKENS] synthesis: in=617 out=512 cost=$0.009531
+2026-10-19T03:36:42 [LOG] query_complete: {"trace_id": "dbf6d5f1", "route": "both", "sql_validation": "PASSED", "retrieval_chunk_count": 5, "token_usage": {"input": 617, "output": 512}}
+2026-10-19T03:36:42 END RequestId: 987bf326-fb62-4322-a419-3b5e7b2cee78
+2026-10-19T03:36:42 REPORT RequestId: 987bf326-fb62-4322-a419-3b5e7b2cee78	Duration: 16147.91 ms	Billed Duration: 19909 ms	Memory Size: 512 MB	Max Memory Used: 450 MB	Init Duration: 3760.66 ms
+2026-10-19T03:37:43 START RequestId: ed26067f-7d20-4718-b1d8-d2d7c63a957a Version: $LATEST
+2026-10-19T03:37:43 [LOG] query_start: {"trace_id": "a32178d0"}
+2026-10-19T03:37:44 [TOKENS] sql_generation: in=181 out=54 cost=$0.001353
+2026-10-19T03:37:45 [TOKENS] sql_interpretation: in=44 out=14 cost=$0.000342
+2026-10-19T03:37:47 [TOKENS] synthesis: in=156 out=181 cost=$0.003183
+2026-10-19T03:37:47 [LOG] query_complete: {"trace_id": "a32178d0", "route": "sql", "sql_validation": "PASSED", "retrieval_chunk_count": null, "token_usage": {"input": 156, "output": 181}}
+2026-10-19T03:37:47 END RequestId: ed26067f-7d20-4718-b1d8-d2d7c63a957a
+2026-10-19T03:37:47 REPORT RequestId: ed26067f-7d20-4718-b1d8-d2d7c63a957a	Duration: 4064.80 ms	Billed Duration: 4065 ms	Memory Size: 512 MB	Max Memory Used: 450 MB
+2026-10-19T03:38:03 START RequestId: 57758ac9-45af-4285-b4ed-5d5dacc465bd Version: $LATEST
+2026-10-19T03:38:03 [LOG] query_start: {"trace_id": "4b603d0e"}
+2026-10-19T03:38:04 [TOKENS] sql_generation: in=295 out=26 cost=$0.001275
+2026-10-19T03:38:04 [TOKENS] sql_interpretation: in=42 out=14 cost=$0.000336
+2026-10-19T03:38:06 [TOKENS] synthesis: in=120 out=129 cost=$0.002295
+2026-10-19T03:38:06 [LOG] query_complete: {"trace_id": "4b603d0e", "route": "sql", "sql_validation": "PASSED", "retrieval_chunk_count": null, "token_usage": {"input": 120, "output": 129}}
+2026-10-19T03:38:06 END RequestId: 57758ac9-45af-4285-b4ed-5d5dacc465bd
+2026-10-19T03:38:06 REPORT RequestId: 57758ac9-45af-4285-b4ed-5d5dacc465bd	Duration: 3436.94 ms	Billed Duration: 3437 ms	Memory Size: 512 MB	Max Memory Used: 450 MB

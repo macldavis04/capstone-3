@@ -18,6 +18,7 @@ from dotenv import load_dotenv
 from bedrock_client import invoke_claude
 load_dotenv()
 
+# Cap replayed history: every turn kept here adds input tokens to every later Bedrock call.
 HISTORY_TURNS = 3
 HISTORY_ANSWER_CHARS = 300
 

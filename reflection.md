@@ -1,0 +1,7 @@
+# Reflection
+
+Of my eight test questions, the one that most tested my orchestrator was the question asking for Beta Financial's current stock price. Neither the database nor the documents contain stock data, so the question had no correct place to go. My router decides between SQL, retrieval, or both, but it does not have an option for a question that neither source can answer. As a result, the question was sent to the retrieval agent by default.
+
+Even so, the system still gave the right response. Because the retrieval agent is told to answer only from the documents it finds, it recognized that the information was not there, and the final answer declined honestly instead of making something up. For that reason, I would call this a routing problem rather than a validation or synthesis problem. The router did not understand that the question was out of scope, and the safeguards inside the agent are what kept the answer accurate.
+
+This tells me that multi-agent systems are still more fragile than a single well-scoped agent in the places where work is handed off. A single agent only has to answer the question in front of it, while an orchestrator first has to decide what kind of question it is with very little information. When that decision is off, the system depends on each individual agent to catch the mistake. In my project the agents did catch it, which shows that building guardrails into every agent matters just as much as getting the routing right.
