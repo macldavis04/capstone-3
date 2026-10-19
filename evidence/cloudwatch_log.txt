@@ -1,0 +1,35 @@
+2026-10-16T18:07:48 INIT_START Runtime Version: python:3.12.mainlinev2.v43	Runtime Version ARN: arn:aws:lambda:us-east-1::runtime:36aeb19f3326e129d9f096dea0a3c6a9ca8dce2610e62d2b2060747602d863ae
+2026-10-16T18:07:50 [WARNING]	2026-10-16T18:07:50.350Z		LAMBDA_WARNING: Unhandled exception. The most likely cause is an issue in the function code. However, in rare cases, a Lambda runtime update can cause unexpected function behavior. For functions using managed runtimes, runtime updates can be triggered by a function change, or can be applied automatically. To determine if the runtime has been updated, check the runtime version in the INIT_START log entry. If this error correlates with a change in the runtime version, you may be able to mitigate this error by temporarily rolling back to the previous runtime version. For more information, see https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
+2026-10-16T18:07:50 [ERROR] Runtime.ImportModuleError: Unable to import module 'lambda_handler': No module named 'langchain_protocol'
+Traceback (most recent call last):
+2026-10-16T18:07:50 INIT_REPORT Init Duration: 2435.78 ms	Phase: init	Status: error	Error Type: Runtime.ImportModuleError
+2026-10-16T18:07:52 [WARNING]	2026-10-16T18:07:52.670Z		LAMBDA_WARNING: Unhandled exception. The most likely cause is an issue in the function code. However, in rare cases, a Lambda runtime update can cause unexpected function behavior. For functions using managed runtimes, runtime updates can be triggered by a function change, or can be applied automatically. To determine if the runtime has been updated, check the runtime version in the INIT_START log entry. If this error correlates with a change in the runtime version, you may be able to mitigate this error by temporarily rolling back to the previous runtime version. For more information, see https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
+2026-10-16T18:07:52 [ERROR] Runtime.ImportModuleError: Unable to import module 'lambda_handler': No module named 'langchain_protocol'
+Traceback (most recent call last):
+2026-10-16T18:07:52 INIT_REPORT Init Duration: 2317.61 ms	Phase: invoke	Status: error	Error Type: Runtime.ImportModuleError
+2026-10-16T18:07:52 START RequestId: 7b33eb15-d18f-439f-ac24-b80104d67dd8 Version: $LATEST
+2026-10-16T18:07:52 END RequestId: 7b33eb15-d18f-439f-ac24-b80104d67dd8
+2026-10-16T18:07:52 REPORT RequestId: 7b33eb15-d18f-439f-ac24-b80104d67dd8	Duration: 2336.86 ms	Billed Duration: 2337 ms	Memory Size: 512 MB	Max Memory Used: 120 MB	Status: error	Error Type: Runtime.ImportModuleError
+2026-10-16T18:13:33 INIT_START Runtime Version: python:3.12.mainlinev2.v43	Runtime Version ARN: arn:aws:lambda:us-east-1::runtime:36aeb19f3326e129d9f096dea0a3c6a9ca8dce2610e62d2b2060747602d863ae
+2026-10-16T18:13:35 [WARNING]	2026-10-16T18:13:35.517Z		LAMBDA_WARNING: Unhandled exception. The most likely cause is an issue in the function code. However, in rare cases, a Lambda runtime update can cause unexpected function behavior. For functions using managed runtimes, runtime updates can be triggered by a function change, or can be applied automatically. To determine if the runtime has been updated, check the runtime version in the INIT_START log entry. If this error correlates with a change in the runtime version, you may be able to mitigate this error by temporarily rolling back to the previous runtime version. For more information, see https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
+2026-10-16T18:13:35 [ERROR] Runtime.ImportModuleError: Unable to import module 'lambda_handler': No module named 'websockets'
+Traceback (most recent call last):
+2026-10-16T18:13:35 INIT_REPORT Init Duration: 1716.57 ms	Phase: init	Status: error	Error Type: Runtime.ImportModuleError
+2026-10-16T18:13:37 [WARNING]	2026-10-16T18:13:37.112Z		LAMBDA_WARNING: Unhandled exception. The most likely cause is an issue in the function code. However, in rare cases, a Lambda runtime update can cause unexpected function behavior. For functions using managed runtimes, runtime updates can be triggered by a function change, or can be applied automatically. To determine if the runtime has been updated, check the runtime version in the INIT_START log entry. If this error correlates with a change in the runtime version, you may be able to mitigate this error by temporarily rolling back to the previous runtime version. For more information, see https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
+2026-10-16T18:13:37 [ERROR] Runtime.ImportModuleError: Unable to import module 'lambda_handler': No module named 'websockets'
+Traceback (most recent call last):
+2026-10-16T18:13:37 INIT_REPORT Init Duration: 1576.54 ms	Phase: invoke	Status: error	Error Type: Runtime.ImportModuleError
+2026-10-16T18:13:37 START RequestId: 7a55ee22-b12d-48c6-a74f-8382164ee079 Version: $LATEST
+2026-10-16T18:13:37 END RequestId: 7a55ee22-b12d-48c6-a74f-8382164ee079
+2026-10-16T18:13:37 REPORT RequestId: 7a55ee22-b12d-48c6-a74f-8382164ee079	Duration: 1591.63 ms	Billed Duration: 1592 ms	Memory Size: 512 MB	Max Memory Used: 120 MB	Status: error	Error Type: Runtime.ImportModuleError
+2026-10-16T18:19:56 INIT_START Runtime Version: python:3.12.mainlinev2.v43	Runtime Version ARN: arn:aws:lambda:us-east-1::runtime:36aeb19f3326e129d9f096dea0a3c6a9ca8dce2610e62d2b2060747602d863ae
+2026-10-16T18:20:00 [0;93m2026-10-16 18:20:00.589102210 [W:onnxruntime:Default, telemetry_1ds.cc:600 operator()] Failed to persist telemetry device ID; using an in-memory identifier[m
+2026-10-16T18:20:00 START RequestId: 0be0c408-695d-47a0-aaab-4a0287064168 Version: $LATEST
+2026-10-16T18:20:00 [LOG] query_start: {"trace_id": "5733230e"}
+2026-10-16T18:20:01 [TOKENS] sql_generation: in=196 out=46 cost=$0.001278
+2026-10-16T18:20:03 [TOKENS] sql_interpretation: in=63 out=122 cost=$0.002019
+2026-10-16T18:20:18 [TOKENS] retrieval_answer: in=1277 out=249 cost=$0.007566
+2026-10-16T18:20:21 [TOKENS] synthesis: in=593 out=402 cost=$0.007809
+2026-10-16T18:20:21 [LOG] query_complete: {"trace_id": "5733230e", "route": "both", "sql_validation": "PASSED", "retrieval_chunk_count": 5, "token_usage": {"input": 593, "output": 402}}
+2026-10-16T18:20:21 END RequestId: 0be0c408-695d-47a0-aaab-4a0287064168
+2026-10-16T18:20:21 REPORT RequestId: 0be0c408-695d-47a0-aaab-4a0287064168	Duration: 21119.30 ms	Billed Duration: 24832 ms	Memory Size: 512 MB	Max Memory Used: 450 MB	Init Duration: 3712.39 ms

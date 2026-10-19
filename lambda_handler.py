@@ -12,11 +12,12 @@ def handler(event, context):
     try:
         body = json.loads(event.get("body", "{}"))
         question = body.get("question", "").strip()
+        history = body.get("history", [])
 
         if not question:
             return {"statusCode": 400, "body": json.dumps({"error": "question is required"})}
 
-        result = run_traced_query(orchestrator, question)
+        result = run_traced_query(orchestrator, question, history)
 
         sql_validation = None
         if result.get("sql_result"):
@@ -28,7 +29,8 @@ def handler(event, context):
                 "answer": result["final_answer"],
                 "route": result["route"],
                 "sql_validation": sql_validation,
-                "token_usage": result.get("token_usage", {})
+                "token_usage": result.get("token_usage", {}),
+                "history": result["history"]
             })
         }
     except Exception as e:

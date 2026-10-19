@@ -18,6 +18,7 @@ class OrchestratorState(TypedDict):
     retrieval_result: Optional[dict]
     final_answer: Optional[str]
     token_usage: Optional[dict]
+    history: Optional[list]
 
 
 SQL_KEYWORDS = [
@@ -40,6 +41,10 @@ def route_question(state: OrchestratorState) -> OrchestratorState:
         route = "both"
     elif is_sql:
         route = "sql"
+    elif is_doc:
+        route = "retrieval"
+    elif state.get("history"):
+        route = state["history"][-1].get("route", "retrieval")
     else:
         route = "retrieval"
 
@@ -49,14 +54,14 @@ def route_question(state: OrchestratorState) -> OrchestratorState:
 def call_sql_agent(state: OrchestratorState) -> OrchestratorState:
     if state["route"] not in ["sql", "both"]:
         return state
-    result = run_sql_agent(state["question"])
+    result = run_sql_agent(state["question"], state.get("history"))
     return {**state, "sql_result": result}
 
 
 def call_retrieval_agent(state: OrchestratorState) -> OrchestratorState:
     if state["route"] not in ["retrieval", "both"]:
         return state
-    result = run_retrieval_agent(state["question"])
+    result = run_retrieval_agent(state["question"], state.get("history"))
     return {**state, "retrieval_result": result}
 
 

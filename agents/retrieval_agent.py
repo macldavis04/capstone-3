@@ -63,8 +63,9 @@ def check_grounding(answer: str, chunks: list[dict]) -> bool:
     return all(1 <= int(s) <= len(chunks) for s in cited_sources)
 
 
-def run_retrieval_agent(question: str) -> dict:
-    chunks = retrieve(question)
+def run_retrieval_agent(question: str, history: list = None) -> dict:
+    search_text = f"{history[-1]['question']} {question}" if history else question
+    chunks = retrieve(search_text)
     if not chunks:
         return {
             "success": False,

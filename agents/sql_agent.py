@@ -18,6 +18,9 @@ from dotenv import load_dotenv
 from bedrock_client import invoke_claude
 load_dotenv()
 
+HISTORY_TURNS = 3
+HISTORY_ANSWER_CHARS = 300
+
 SCHEMA_CONTEXT = """
 Tables available:
 - clients(id, name, industry, region, contract_value, created_date)
@@ -57,9 +60,18 @@ def validate_sql(query: str) -> dict:
     return {"valid": True, "reason": "OK"}
 
 
-def generate_sql(question: str) -> str:
+def format_history(history: list) -> str:
+    return "\n".join(
+        f"Q: {t['question']}\nA: {t['answer'][:HISTORY_ANSWER_CHARS]}"
+        for t in history[-HISTORY_TURNS:]
+    )
+
+
+def generate_sql(question: str, history: list = None) -> str:
+    convo = f"Conversation so far:\n{format_history(history)}\n\n" if history else ""
     prompt = (
         f"{SCHEMA_CONTEXT}\n\n"
+        f"{convo}"
         f"Generate a SQL query to answer: {question}\n\n"
         "Return ONLY the SQL query. No explanation, no markdown, no backticks."
     )
@@ -89,8 +101,8 @@ def execute_query_safely(sql: str) -> dict:
         return {"success": False, "error": str(e), "validation": "EXECUTION_ERROR", "sql": sql}
 
 
-def validated_sql_agent(question: str) -> dict:
-    sql = generate_sql(question)
+def validated_sql_agent(question: str, history: list = None) -> dict:
+    sql = generate_sql(question, history)
     result = execute_query_safely(sql)
 
     if not result["success"]:
@@ -115,9 +127,9 @@ def validated_sql_agent(question: str) -> dict:
     }
 
 
-def run_sql_agent(question: str) -> dict:
+def run_sql_agent(question: str, history: list = None) -> dict:
     """Standardized wrapper matching the Shared Tool Registry lab's interface."""
-    result = validated_sql_agent(question)
+    result = validated_sql_agent(question, history)
     return {
         "success": result["validation"] == "PASSED",
         "answer": result["answer"],

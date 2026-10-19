@@ -27,14 +27,15 @@ def route_question_logged(state):
     return result
 
 
-def run_traced_query(orchestrator, question: str) -> dict:
+def run_traced_query(orchestrator, question: str, history: list = None) -> dict:
     trace_id = str(uuid.uuid4())[:8]
 
     log_decision("query_start", question, {"trace_id": trace_id})
 
     result = orchestrator.invoke({
         "question": question, "route": None, "sql_result": None,
-        "retrieval_result": None, "final_answer": None, "token_usage": None
+        "retrieval_result": None, "final_answer": None, "token_usage": None,
+        "history": history or []
     })
 
     # NOTE: sql_result's "validation" field is nested under "metadata", not
@@ -51,4 +52,7 @@ def run_traced_query(orchestrator, question: str) -> dict:
         "token_usage": result.get("token_usage")
     })
 
+    result["history"] = (history or []) + [
+        {"question": question, "answer": result["final_answer"], "route": result["route"]}
+    ]
     return result

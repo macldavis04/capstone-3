@@ -1,0 +1,11 @@
+.env
+.DS_Store
+*.pyc
+*.zip
+__pycache__
+venv/
+package/
+build/
+model.onnx
+tokenizer.json
+agent_decisions.jsonl
